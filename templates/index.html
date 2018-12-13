@@ -3,7 +3,13 @@
 <header>
   <div class="center-content">
     <div class="value-prop">
-      <h1 class="title m-5">Trouver un étudiant pour créer votre site internet</h1>
+
+      {% if prenom %}
+      <h1 class="title m-5">Trouver un {{ prenom }} pour créer votre site internet</h1>
+      {% else %}
+      <h1 class="title m-5">Trouver un Etudiant pour créer votre site internet</h1>
+      {% endif %}
+
       <div class="d-flex flex-direction-row justify-content-center">
         <a class ="CTA-projet m-5 col-md-5" href="#contact">Déposer votre projet</a>
         <a class ="CTA-etudiant m-5 col-md-5" href="etudiant.html">Je suis étudiant</a>
@@ -53,7 +59,7 @@
 <div class="contact d-flex flex-column align-items-center" id="contact">
   <h1 class="text-center mt-5 mb-2">Déposez votre projet</h1>
   <h2 class="mb-5 sous-titre">Détaillez votre projet, nous vous attribuons l'étudiant le plus à même de répondre à votre besoin</h2>
-  <form class="d-flex flex-column align-items-center" action="https://formspree.io/antoinekrajnc@gmail.com" method="post">
+  <form class="d-flex flex-column align-items-center" action="{{ url_for('project') }}" method="POST">
       <div class="d-flex flex-row col-md-6 mr-5">
         <label>Nom</label>
         <input type="text" name="nom_utilisateur">

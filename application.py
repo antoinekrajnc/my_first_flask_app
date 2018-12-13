@@ -1,17 +1,32 @@
-from flask import Flask, url_for, render_template
+from flask import Flask, url_for, render_template, request, make_response
 app = Flask(__name__)
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 def index():
-    return render_template("index.html")
+    if request.method == "GET":
+        return render_template("index.html", prenom="Michel")
+    elif request.method == "POST":
+        nom = request.form["nom_utilisateur"]
+        email = request.form["email_utilisateur"]
+        message = request.form["message_utilisateur"]
+        response = make_response(render_template("project.html"))
+        response.set_cookies("Nom","{}".format(nom))
+        return response
 
-@app.route("/project")
+@app.route("/project", methods=["GET", "POST"])
 def project():
-    return render_template("project.html")
+    if request.method == "GET":
+        return render_template("project.html")
+    elif request.method == "POST":
+        nom = request.form["nom_utilisateur"]
+        email = request.form["email_utilisateur"]
+        message = request.form["message_utilisateur"]
+        return render_template("project.html", name = nom, email = email, message = message)
 
 @app.route("/urls")
 def urls():
-    return url_for("about")
+    nom = request.cookies.get("Nom")
+    return render_template("url.html", nom = nom)
 
 if __name__ == "__main__":
     app.run(debug=True)
