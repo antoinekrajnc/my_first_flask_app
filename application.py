@@ -1,5 +1,6 @@
 from flask import Flask, url_for, render_template, request, make_response, json
 import requests
+from sklearn.externals import joblib
 app = Flask(__name__)
 
 dark_sky_api_key = "073ed950bcd367ad35e76ea60cf5511c"
@@ -36,6 +37,13 @@ def project():
 def urls():
     nom = request.cookies.get("Nom")
     return render_template("url.html", nom = nom)
+
+@app.route("/predict", methods=["GET", "POST"])
+def predict():
+    regressor = joblib.load("./linear_regression_model.pkl")
+    xp = [[float(request.form["regression"])]]
+    y_pred = float(regressor.predict(xp))
+    return render_template("predict.html", xp = xp[0][0], y_pred = y_pred)
 
 if __name__ == "__main__":
     app.run(debug=True)
