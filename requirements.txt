@@ -1,3 +1,4 @@
+requests
 sklearn
 json
 click==6.7
