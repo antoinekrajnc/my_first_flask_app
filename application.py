@@ -1,6 +1,6 @@
 from flask import Flask, url_for, render_template, request, make_response, json
-#from sklearn.externals import joblib
-#import requests
+from sklearn.externals import joblib
+import requests
 
 
 app = Flask(__name__)
@@ -15,7 +15,7 @@ def index():
     elif request.method == "POST":
         response = make_response(render_template("project.html"))
         return response
-"""
+
 @app.route("/project", methods=["GET", "POST"])
 def project():
     current_location = requests.get("http://api.ipstack.com/check", params={"access_key": ipstack_api_key})
@@ -46,6 +46,6 @@ def predict():
     xp = [[float(request.form["regression"])]]
     y_pred = float(regressor.predict(xp))
     return render_template("predict.html", xp = xp[0][0], y_pred = y_pred)
-"""
+
 if __name__ == "__main__":
     app.run(debug=True)
