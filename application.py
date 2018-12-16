@@ -1,6 +1,6 @@
 from flask import Flask, url_for, render_template, request, make_response, json
-from sklearn.externals import joblib
 import requests
+from sklearn.externals import joblib
 
 
 app = Flask(__name__)
