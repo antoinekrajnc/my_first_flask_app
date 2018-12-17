@@ -2,7 +2,6 @@ from flask import Flask, url_for, render_template, request, make_response, json
 import requests
 from sklearn.externals import joblib
 
-
 app = Flask(__name__)
 
 dark_sky_api_key = "073ed950bcd367ad35e76ea60cf5511c"
